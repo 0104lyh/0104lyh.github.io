@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://0104lyh.github.io/</id>
+    <title>咸味花生酱</title>
+    <updated>2020-01-27T03:49:24.668Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://0104lyh.github.io/"/>
+    <link rel="self" href="https://0104lyh.github.io/atom.xml"/>
+    <subtitle>个人博客</subtitle>
+    <logo>https://0104lyh.github.io/images/avatar.png</logo>
+    <icon>https://0104lyh.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, 咸味花生酱</rights>
+    <entry>
+        <title type="html"><![CDATA[apt换源等]]></title>
+        <id>https://0104lyh.github.io/post/apt</id>
+        <link href="https://0104lyh.github.io/post/apt">
+        </link>
+        <updated>2020-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<p>我们用的linux都是linux的Debian发行版已经一些以Debian为基础的发行版（Ubuntu等），因此要熟悉一个软件包管理工具——APT（Advanced Package Tool）。这个工具是可以提供一些软件的下载、安装和更新的操作。</p>
+<p>在ubuntu 16.04之后的版本中，apt命令整合了apt-get、apt-cache 和 apt-config 中最常用命令选项的集合。因此很多操作都可以直接使用apt这一条命令来执行</p>
+<pre><code>#安装
+sudo apt install xxx
+#卸载
+sudo apt remove xxx
+#更新软件包
+sudo apt update  
+#升级软件包
+sudo apt upgrade 
+#仅删除不需要再次下载的软件包
+sudo apt autoremove  
+</code></pre>
+<p>apt初始的源一般在国外，速度会比较慢。所以一般情况下回通过换源来提高速度，apt的换源目的和pip和conda的换源都差不多。</p>
+<p>具体操作为：</p>
+<pre><code>cd /etc/apt/
+sudo vim sources.list
+#将 http://archive.ubuntu.com/ 部分更换为获取到的国内镜像源地址，更换后示例内容如下：
+eb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+
+sudo apt-get update
+</code></pre>
+<p>以上的为基本的apt操作，这些都是在当前用户为主账户的也就是有管理员权限的账户时使用的。在非root用户情况下，还是需要源码编译来操作的。</p>
+<p>apt源码安装的步骤一般为：</p>
+<pre><code>1. 获取源代码，常用wget方式直接从url下载，ubuntu可以用apt-get source来获取仓库中软件源代码；
+2. 解压源代码安装包，多为gzip过的tar包，一般使用tar -zxvf xxx.tar.gz即可；
+3. 切换到解压后的目录，运行 ./configure。./configure –help可以列出配置项，非root用户最重要的配置项是安装目录prefix，例如 ./configure –prefix=/path/to/bin。在无法自动找到依赖库位置的情况下，用 –with-xx-dir=xxx 的形式配置依赖库位置；
+4. 编译源代码并复制可执行文件到指定的安装目录： make &amp;&amp;  make install。这两条命令可以分开执行，make时指定 -j 参数并行编译，能显著减少编译耗时（单进程编译GCC需要几个小时，开启并行编译后可缩短到十几分钟）；
+5. 使用export PATH=/path/to/bin:$PATH更新PATH变量。命令行窗口运行此命令只对本次会话中有效，可将其写到.bashrc或者.bash_profile中；
+6. 如果安装的是动态链接库，则需要更新动态链接库路径： export LD_LIBRARY_PATH=/path/to/library:$LD_LIBRARY_PATH。最好将此命令写在.bashrc文件中，用户下次打开会话时自动执行。
+</code></pre>
+<p>这里不做详细的举例，需要用的时候百度相关的就好。</p>
+<p>cmake的安装：</p>
+<pre><code>getconf LONG_BIT #用于查看自己操作系统的位数
+#下载相应版本的cmake
+wget https://cmake.org/files/v3.3/cmake-3.3.2.tar.gz 
+#解压
+tar xzvf cmake-3.3.2.tar.gz
+#没装gcc和g++的记得apt装一下 
+#解压后进入目录
+cd cmake-3.3.2
+./bootstrap
+make
+make install 
+#查看camke版本
+camke --version
+有显示就安装成功了
+</code></pre>
+<p>cmake实践</p>
+<p><a href="https://github.com/ShanQincheng/jmuSupplicant/blob/master/README.md">https://github.com/ShanQincheng/jmuSupplicant/blob/master/README.md</a></p>
+]]></content>
+    </entry>
+</feed>
