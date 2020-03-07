@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://0104lyh.github.io/</id>
     <title>咸味花生酱</title>
-    <updated>2020-02-20T15:23:08.129Z</updated>
+    <updated>2020-03-07T11:53:59.460Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://0104lyh.github.io/"/>
     <link rel="self" href="https://0104lyh.github.io/atom.xml"/>
@@ -10,6 +10,18 @@
     <logo>https://0104lyh.github.io/images/avatar.png</logo>
     <icon>https://0104lyh.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 咸味花生酱</rights>
+    <entry>
+        <title type="html"><![CDATA[在IDEA中修改Web文件夹后启动项目404问题]]></title>
+        <id>https://0104lyh.github.io/post/zai-idea-zhong-xiu-gai-web-wen-jian-jia-hou-qi-dong-xiang-mu-404-wen-ti</id>
+        <link href="https://0104lyh.github.io/post/zai-idea-zhong-xiu-gai-web-wen-jian-jia-hou-qi-dong-xiang-mu-404-wen-ti">
+        </link>
+        <updated>2020-03-07T11:48:15.000Z</updated>
+        <content type="html"><![CDATA[<p>IDEA生成的WEB根目录的默认名称为web，为了合乎作业规范我改成了WebRoot，突然发现运行项目的时候出现了404，于是想到应该是修改了文件夹的名称问题。于是发现了应该是IDEA中的Web Resource Directory Path没有修改。具体操作如下：<br>
+<img src="https://0104lyh.github.io//post-images/1583581966429.jpg" alt="" loading="lazy"></p>
+<p>project  structure可以用快捷键ctrl+alt+shift+s呼出，也可以用右上角的这个图标：<br>
+<img src="https://0104lyh.github.io//post-images/1583582030420.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[TAnet]]></title>
         <id>https://0104lyh.github.io/post/tanet</id>
